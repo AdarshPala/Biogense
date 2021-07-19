@@ -67,7 +67,6 @@ namespace Biogense
                 }
             }
 
-            Console.WriteLine(count);
             return count;
         }
 
