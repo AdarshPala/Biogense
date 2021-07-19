@@ -13,7 +13,7 @@ namespace Biogense
                 Console.Clear();
                 grid.Print();
                 grid.Update();
-                Thread.Sleep(70000);
+                Thread.Sleep(700);
             }
         }
     }
