@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 
 namespace Biogense
 {
@@ -6,11 +7,14 @@ namespace Biogense
     {
         static void Main(string[] args)
         {
-            //const char ALIVE = 'o';
-            //const char DEAD = ' ';
-            Console.WriteLine("Hello World!");
             var grid = new Grid(4);
-            grid.Print();
+            for (int i = 0; i < 20; i++)
+            {
+                Console.Clear();
+                grid.Print();
+                grid.Update();
+                Thread.Sleep(70000);
+            }
         }
     }
 }
