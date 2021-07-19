@@ -23,9 +23,10 @@ namespace Biogense
                     output.Append(Cells[row, col]);
                 }
 
-                Console.WriteLine(output.ToString());
-                output.Clear();
+                output.Append('\n');
             }
+
+            Console.Write(output.ToString());
         }
     }
 }
