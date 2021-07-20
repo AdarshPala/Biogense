@@ -28,7 +28,7 @@ namespace Biogense
                 for (int col = 0; col < Size; col++)
                 {
                     bool isAlive = Cells[row, col] == ALIVE;
-                    int neighbourCount = GetNeighbourCount(GetNeighbours(row, col));
+                    int neighbourCount = GetAliveNeighbourCount(GetNeighbours(row, col));
                     updatedCells[row, col] = GetNewState(isAlive, neighbourCount);
                 }
             }
@@ -38,14 +38,15 @@ namespace Biogense
 
         char[] GetNeighbours(int row, int col)
         {
-            return new char[] {
+            return new char[]
+            {
                 Cells[Mod(row - 1, Size), Mod(col - 1, Size)],
-                Cells[Mod(row - 1, Size), Mod(col, Size)],
+                Cells[Mod(row - 1, Size), col],
                 Cells[Mod(row - 1, Size), Mod(col + 1, Size)],
-                Cells[Mod(row, Size), Mod(col - 1, Size)],
-                Cells[Mod(row, Size), Mod(col + 1, Size)],
+                Cells[row, Mod(col - 1, Size)],
+                Cells[row, Mod(col + 1, Size)],
                 Cells[Mod(row + 1, Size), Mod(col - 1, Size)],
-                Cells[Mod(row + 1, Size), Mod(col, Size)],
+                Cells[Mod(row + 1, Size), col],
                 Cells[Mod(row + 1, Size), Mod(col + 1, Size)],
             };
         }
@@ -56,18 +57,18 @@ namespace Biogense
             return remainder < 0 ? remainder + divisor : remainder;
         }
 
-        static int GetNeighbourCount(char[] neighbours)
+        static int GetAliveNeighbourCount(char[] neighbours)
         {
-            int count = 0;
+            int aliveNeighbourCount = 0;
             foreach (char cell in neighbours)
             {
                 if (cell == ALIVE)
                 {
-                    count++;
+                    aliveNeighbourCount++;
                 }
             }
 
-            return count;
+            return aliveNeighbourCount;
         }
 
         static char GetNewState(bool isAlive, int neighbourCount)
